@@ -1118,7 +1118,7 @@ var sliders = function sliders(slides, dir, prev, next) {
     if (dir === "vertical") {
       paused = setInterval(function () {
         plusSlides(1);
-        items[slideIndex - 1].classList.add('slideInDown');
+        items[slideIndex - 1].classList.add('fadeInDown');
       }, 3000);
     } else {
       paused = setInterval(function () {
