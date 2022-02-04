@@ -4203,8 +4203,8 @@ var forms = function forms() {
       console.log(item.files[0]);
       var dots;
       var arr = item.files[0].name.split('.');
-      arr[0].lenght > 6 ? dots = "..." : dots = '.';
-      var name = arr[0].substring(0, 5) + dots + arr[1];
+      arr[0].length > 6 ? dots = "..." : dots = '.';
+      var name = arr[0].substring(0, 6) + dots + arr[1];
       item.previousElementSibling.textContent = name;
     });
   });
