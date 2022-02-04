@@ -6,7 +6,8 @@ const modals = () => {
       modal = document.querySelector(modalSelector),
       close = document.querySelector(closeSelector),
       windows = document.querySelectorAll('[data-modal]'),
-      scroll = calcScroll();
+      scroll = calcScroll(),
+      giftTrigger = document.querySelector('.fixed-gift');
 
     trigger.forEach(item => {
       item.addEventListener('click', (e) => {
@@ -28,6 +29,8 @@ const modals = () => {
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
         document.body.style.marginRight = `${scroll}px`;
+
+        giftTrigger.style.right = `${(+getComputedStyle(giftTrigger).right.replace(/\D/g, '') + calcScroll())}px`;
       });
     });
 
@@ -39,6 +42,8 @@ const modals = () => {
       modal.style.display = "none";
       document.body.style.overflow = "";
       document.body.style.marginRight = "0px";
+
+      giftTrigger.style.right = '';
     });
 
     modal.addEventListener('click', (e) => {
@@ -50,6 +55,8 @@ const modals = () => {
         modal.style.display = "none";
         document.body.style.overflow = "";
         document.body.style.marginRight = "0px";
+
+        giftTrigger.style.right = '';
       }
     });
   }
@@ -58,17 +65,26 @@ const modals = () => {
     setTimeout(function () {
       let display;
 
-      document.querySelectorAll('[data-modal]').forEach(item => {
+      const windows = document.querySelectorAll('[data-modal]');
+      windows.forEach(item => {
         if (getComputedStyle(item).display !== 'none') {
           display = "block";
         }
       });
 
       if (!display) {
+        windows.forEach(item => {
+          item.style.display = 'none';
+          item.classList.add('animated', 'fadeIn');
+        });
+
         document.querySelector(selector).style.display = "block";
         document.body.style.overflow = "hidden";
-        let scroll = calcScroll();
+
+        let scroll = calcScroll(),
+          giftTrigger = document.querySelector('.fixed-gift');
         document.body.style.marginRight = `${scroll}px`;
+        giftTrigger.style.right = `${(+getComputedStyle(giftTrigger).right.replace(/\D/g, '') + calcScroll())}px`;
       }
     }, time);
   }
@@ -103,7 +119,7 @@ const modals = () => {
   bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
   openByScroll('.fixed-gift');
 
-  showModalByTime('.popup-consultation', 60000);
+  showModalByTime('.popup-consultation', 2000);
 };
 
 export default modals;
