@@ -16,6 +16,11 @@ const showMoreBlocks = (trigger, wrapper) => {
   // });
 
   btn.addEventListener('click', function () {
+    let loadingMessage = document.createElement('div');
+        loadingMessage.textContent = "Загрузка...";
+        loadingMessage.classList.add('_loading-msg', 'animated', 'fadeIn');
+        document.querySelector(wrapper).appendChild(loadingMessage);
+
     getResourse('http://localhost:3000/styles')
       .then(res => createCards(res))
       .catch(() => {
@@ -23,6 +28,9 @@ const showMoreBlocks = (trigger, wrapper) => {
         statusMessage.textContent = "Ошибка! Что-то пошло не так.";
         statusMessage.classList.add('_status-msg', 'animated', 'fadeIn');
         document.querySelector(wrapper).appendChild(statusMessage);
+      })
+      .finally (() => {
+        loadingMessage.remove();
       });
 
     this.remove();

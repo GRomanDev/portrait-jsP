@@ -4660,11 +4660,20 @@ var modals = function modals() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
 /* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.link */ "./node_modules/core-js/modules/es.string.link.js");
-/* harmony import */ var core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.promise.finally */ "./node_modules/core-js/modules/es.promise.finally.js");
+/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.link */ "./node_modules/core-js/modules/es.string.link.js");
+/* harmony import */ var core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
+
+
+
 
 
 
@@ -4683,13 +4692,19 @@ var showMoreBlocks = function showMoreBlocks(trigger, wrapper) {
   // });
 
   btn.addEventListener('click', function () {
-    Object(_services_requests__WEBPACK_IMPORTED_MODULE_3__["getResourse"])('http://localhost:3000/styles').then(function (res) {
+    var loadingMessage = document.createElement('div');
+    loadingMessage.textContent = "Загрузка...";
+    loadingMessage.classList.add('_loading-msg', 'animated', 'fadeIn');
+    document.querySelector(wrapper).appendChild(loadingMessage);
+    Object(_services_requests__WEBPACK_IMPORTED_MODULE_6__["getResourse"])('http://localhost:3000/styles').then(function (res) {
       return createCards(res);
     }).catch(function () {
       var statusMessage = document.createElement('div');
       statusMessage.textContent = "Ошибка! Что-то пошло не так.";
       statusMessage.classList.add('_status-msg', 'animated', 'fadeIn');
       document.querySelector(wrapper).appendChild(statusMessage);
+    }).finally(function () {
+      loadingMessage.remove();
     });
     this.remove();
   });
