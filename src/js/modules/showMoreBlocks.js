@@ -1,6 +1,4 @@
-import {
-  getResourse
-} from "../services/requests";
+import {getResourse} from "../services/requests";
 
 const showMoreBlocks = (trigger, wrapper) => {
   const btn = document.querySelector(trigger);
@@ -20,17 +18,18 @@ const showMoreBlocks = (trigger, wrapper) => {
   btn.addEventListener('click', function () {
     getResourse('http://localhost:3000/styles')
       .then(res => createCards(res))
-      .catch(error => console.log(error));
+      .catch(() => {
+        let statusMessage = document.createElement('div');
+        statusMessage.textContent = "Ошибка! Что-то пошло не так.";
+        statusMessage.classList.add('_status-msg', 'animated', 'fadeIn');
+        document.querySelector(wrapper).appendChild(statusMessage);
+      });
 
     this.remove();
   });
 
   function createCards(response) {
-    response.forEach(({
-      src,
-      title,
-      link
-    }) => {
+    response.forEach(({src, title, link}) => {
       let card = document.createElement('div');
 
       card.classList.add('animated', 'fadeInUp', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');

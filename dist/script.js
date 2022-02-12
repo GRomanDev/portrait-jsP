@@ -4685,8 +4685,11 @@ var showMoreBlocks = function showMoreBlocks(trigger, wrapper) {
   btn.addEventListener('click', function () {
     Object(_services_requests__WEBPACK_IMPORTED_MODULE_3__["getResourse"])('http://localhost:3000/styles').then(function (res) {
       return createCards(res);
-    }).catch(function (error) {
-      return console.log(error);
+    }).catch(function () {
+      var statusMessage = document.createElement('div');
+      statusMessage.textContent = "Ошибка! Что-то пошло не так.";
+      statusMessage.classList.add('_status-msg', 'animated', 'fadeIn');
+      document.querySelector(wrapper).appendChild(statusMessage);
     });
     this.remove();
   });
