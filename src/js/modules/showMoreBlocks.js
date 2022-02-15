@@ -21,8 +21,8 @@ const showMoreBlocks = (trigger, wrapper) => {
         loadingMessage.classList.add('_loading-msg', 'animated', 'fadeIn');
         document.querySelector(wrapper).appendChild(loadingMessage);
 
-    getResourse('http://localhost:3000/styles')
-      .then(res => createCards(res))
+    getResourse('assets/db.json')
+      .then(res => createCards(res.styles))
       .catch(() => {
         let statusMessage = document.createElement('div');
         statusMessage.textContent = "Ошибка! Что-то пошло не так.";

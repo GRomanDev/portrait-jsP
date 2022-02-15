@@ -4696,8 +4696,8 @@ var showMoreBlocks = function showMoreBlocks(trigger, wrapper) {
     loadingMessage.textContent = "Загрузка...";
     loadingMessage.classList.add('_loading-msg', 'animated', 'fadeIn');
     document.querySelector(wrapper).appendChild(loadingMessage);
-    Object(_services_requests__WEBPACK_IMPORTED_MODULE_6__["getResourse"])('http://localhost:3000/styles').then(function (res) {
-      return createCards(res);
+    Object(_services_requests__WEBPACK_IMPORTED_MODULE_6__["getResourse"])('assets/db.json').then(function (res) {
+      return createCards(res.styles);
     }).catch(function () {
       var statusMessage = document.createElement('div');
       statusMessage.textContent = "Ошибка! Что-то пошло не так.";
