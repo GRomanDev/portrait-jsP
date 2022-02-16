@@ -4405,19 +4405,8 @@ __webpack_require__.r(__webpack_exports__);
 var filter = function filter() {
   var menu = document.querySelector('.portfolio-menu'),
       items = menu.querySelectorAll('li'),
-      btnAll = menu.querySelector('.all'),
-      btnLovers = menu.querySelector('.lovers'),
-      btnChef = menu.querySelector('.chef'),
-      btnGirl = menu.querySelector('.girl'),
-      btnGuy = menu.querySelector('.guy'),
-      btnGrandmother = menu.querySelector('.grandmother'),
-      btnGranddad = menu.querySelector('.granddad'),
       wrapper = document.querySelector('.portfolio-wrapper'),
       markAll = wrapper.querySelectorAll('.all'),
-      markGirl = wrapper.querySelectorAll('.girl'),
-      markLovers = wrapper.querySelectorAll('.lovers'),
-      markChef = wrapper.querySelectorAll('.chef'),
-      markGuy = wrapper.querySelectorAll('.guy'),
       no = document.querySelector('.portfolio-no');
 
   var typeFilter = function typeFilter(markType) {
@@ -4433,32 +4422,18 @@ var filter = function filter() {
         mark.style.display = 'block';
         mark.classList.add('animated', 'fadeIn');
       });
-    } else {
+    }
+
+    if (markType.length == 0) {
       no.style.display = 'block';
       no.classList.add('animated', 'fadeIn');
     }
   };
 
-  btnAll.addEventListener('click', function () {
-    typeFilter(markAll);
-  });
-  btnLovers.addEventListener('click', function () {
-    typeFilter(markLovers);
-  });
-  btnChef.addEventListener('click', function () {
-    typeFilter(markChef);
-  });
-  btnGuy.addEventListener('click', function () {
-    typeFilter(markGuy);
-  });
-  btnGirl.addEventListener('click', function () {
-    typeFilter(markGirl);
-  });
-  btnGrandmother.addEventListener('click', function () {
-    typeFilter();
-  });
-  btnGranddad.addEventListener('click', function () {
-    typeFilter();
+  menu.addEventListener('click', function (e) {
+    var classSelect = e.target.classList[0];
+    var allElems = wrapper.querySelectorAll(".".concat(classSelect));
+    typeFilter(allElems);
   });
   menu.addEventListener('click', function (e) {
     var target = e.target;
