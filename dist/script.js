@@ -4838,6 +4838,7 @@ var pictureSize = function pictureSize(imgSelector) {
   function showImg(block) {
     var img = block.querySelector('img');
     img.src = img.src.slice(0, -4) + '-1.png';
+    img.classList.add('animated', 'fadeIn');
     block.querySelectorAll('p:not(.sizes-hit)').forEach(function (p) {
       p.style.display = 'none';
     });
@@ -4846,6 +4847,7 @@ var pictureSize = function pictureSize(imgSelector) {
   function hideImg(block) {
     var img = block.querySelector('img');
     img.src = img.src.slice(0, -6) + '.png';
+    img.classList.remove('animated', 'fadeIn');
     block.querySelectorAll('p:not(.sizes-hit)').forEach(function (p) {
       p.style.display = 'block';
     });
