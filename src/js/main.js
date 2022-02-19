@@ -8,6 +8,7 @@ import calcFunc from "./modules/calc";
 import filter from "./modules/filter";
 import pictureSize from "./modules/pictureSize";
 import burger from "./modules/burger";
+import accordion from "./modules/accorfion";
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -23,5 +24,6 @@ window.addEventListener('DOMContentLoaded', () => {
   calcFunc('#size', '#material', '#options', '.promocode', '.calc-price');
   filter();
   pictureSize('.sizes-block');
+  accordion(".accordion-heading");
   burger('.burger-menu', '.burger');
 });
