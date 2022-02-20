@@ -4400,10 +4400,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var accordion = function accordion(triggersSelector) {
+var accordion = function accordion(triggersSelector, contentSelector) {
   var btns = document.querySelectorAll(triggersSelector);
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {
+      var _this = this;
+
+      btns.forEach(function (btn) {
+        if (!_this.classList.contains('active-style')) {
+          btn.classList.remove('active-style');
+          btn.nextElementSibling.classList.remove('active-content');
+          btn.nextElementSibling.style.maxHeight = '0px';
+        }
+      });
       this.classList.toggle('active-style');
       this.nextElementSibling.classList.toggle('active-content');
 
