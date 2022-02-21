@@ -114,6 +114,13 @@ h4 {
   color: #ffffff;
   border: 2px solid #c51abb;
   background-color: transparent;
+  transition: all 0.4s;
+}
+@media (any-hover: hover) {
+  .button-order:hover {
+    color: #c51abb;
+    background: #fff;
+  }
 }
 .fixed-gift {
   position: fixed;
