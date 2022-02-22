@@ -11,6 +11,8 @@ const scrolling = (upSelector) => {
     }
   });
 
+  // scrolling with requestAnimationFrame
+  
   // let links = document.querySelectorAll('[href^="#"]'),
   // speed = 0.15;
   
@@ -51,23 +53,27 @@ const scrolling = (upSelector) => {
     const element = document.documentElement,
           body = document.body;
 
+    let links = document.querySelectorAll('[href^="#"]');
+    
     const calcScroll = () => {
-      upElem.addEventListener('click', function(event) {
-        let scrollTop = Math.round(body.scrollTop || element.scrollTop);
+      links.forEach(link => {
+        link.addEventListener('click', function(event) {
+          let scrollTop = Math.round(body.scrollTop || element.scrollTop);
 
-        if (this.hash !== '') {
-          event.preventDefault();
-          let hashElement = document.querySelector(this.hash),
-              hashElementTop = 0;
+          if (this.hash !== '') {
+            event.preventDefault();
+            let hashElement = document.querySelector(this.hash),
+                hashElementTop = 0;
 
-          while (hashElement.offsetParent) {
-            hashElementTop += hashElement.offsetTop;
-            hashElement = hashElement.offsetParent;
+            while (hashElement.offsetParent) {
+              hashElementTop += hashElement.offsetTop;
+              hashElement = hashElement.offsetParent;
+            }
+
+            hashElementTop = Math.round(hashElementTop);
+            smoothScroll(scrollTop, hashElementTop, this.hash);
           }
-
-          hashElementTop = Math.round(hashElementTop);
-          smoothScroll(scrollTop, hashElementTop, this.hash);
-        }
+        });
       });
     };
 

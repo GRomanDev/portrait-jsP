@@ -4960,6 +4960,9 @@ var pictureSize = function pictureSize(imgSelector) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
 /* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 var scrolling = function scrolling(upSelector) {
@@ -4972,7 +4975,8 @@ var scrolling = function scrolling(upSelector) {
       upElem.classList.add('fadeOut');
       upElem.classList.remove('fadeIn');
     }
-  }); // let links = document.querySelectorAll('[href^="#"]'),
+  }); // scrolling with requestAnimationFrame
+  // let links = document.querySelectorAll('[href^="#"]'),
   // speed = 0.15;
   // links.forEach(link => {
   //   if (link.getAttribute('href') != '#') {
@@ -5003,24 +5007,27 @@ var scrolling = function scrolling(upSelector) {
 
   var element = document.documentElement,
       body = document.body;
+  var links = document.querySelectorAll('[href^="#"]');
 
   var calcScroll = function calcScroll() {
-    upElem.addEventListener('click', function (event) {
-      var scrollTop = Math.round(body.scrollTop || element.scrollTop);
+    links.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var scrollTop = Math.round(body.scrollTop || element.scrollTop);
 
-      if (this.hash !== '') {
-        event.preventDefault();
-        var hashElement = document.querySelector(this.hash),
-            hashElementTop = 0;
+        if (this.hash !== '') {
+          event.preventDefault();
+          var hashElement = document.querySelector(this.hash),
+              hashElementTop = 0;
 
-        while (hashElement.offsetParent) {
-          hashElementTop += hashElement.offsetTop;
-          hashElement = hashElement.offsetParent;
+          while (hashElement.offsetParent) {
+            hashElementTop += hashElement.offsetTop;
+            hashElement = hashElement.offsetParent;
+          }
+
+          hashElementTop = Math.round(hashElementTop);
+          smoothScroll(scrollTop, hashElementTop, this.hash);
         }
-
-        hashElementTop = Math.round(hashElementTop);
-        smoothScroll(scrollTop, hashElementTop, this.hash);
-      }
+      });
     });
   };
 
