@@ -1294,6 +1294,23 @@ h4 {
 .status {
   text-align: center;
 }
+.pageup {
+  opacity: 0;
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  bottom: 100px;
+  right: 5%;
+  z-index: 30;
+  background-color: #e950d7;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 10px;
+  transition: 1s all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @media (max-width: 1399px) {
   .paints {
     display: none;
