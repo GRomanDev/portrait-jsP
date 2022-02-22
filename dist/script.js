@@ -4965,7 +4965,7 @@ __webpack_require__.r(__webpack_exports__);
 var scrolling = function scrolling(upSelector) {
   var upElem = document.querySelector(upSelector);
   window.addEventListener('scroll', function () {
-    if (document.documentElement.scrollTop > 1650) {
+    if (document.documentElement.scrollTop > 1450) {
       upElem.classList.add('animated', 'fadeIn');
       upElem.classList.remove('fadeOut');
     } else {
@@ -4976,30 +4976,32 @@ var scrolling = function scrolling(upSelector) {
   var links = document.querySelectorAll('[href^="#"]'),
       speed = 0.15;
   links.forEach(function (link) {
-    link.addEventListener('click', function (event) {
-      event.preventDefault();
-      var widthTop = document.documentElement.scrollTop,
-          hash = this.hash,
-          toBlock = document.querySelector(hash).getBoundingClientRect().top,
-          start = null;
-      requestAnimationFrame(step);
+    if (link.getAttribute('href') != '#') {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        var widthTop = document.documentElement.scrollTop,
+            hash = this.hash,
+            toBlock = document.querySelector(hash).getBoundingClientRect().top,
+            start = null;
+        requestAnimationFrame(step);
 
-      function step(time) {
-        if (start === null) {
-          start = time;
+        function step(time) {
+          if (start === null) {
+            start = time;
+          }
+
+          var progress = time - start,
+              r = toBlock < 0 ? Math.max(widthTop - progress / speed, widthTop + toBlock) : Math.min(widthTop + progress / speed, widthTop + toBlock);
+          document.documentElement.scrollTo(0, r);
+
+          if (r != widthTop + toBlock) {
+            requestAnimationFrame(step);
+          } else {
+            location.hash = hash;
+          }
         }
-
-        var progress = time - start,
-            r = toBlock < 0 ? Math.max(widthTop - progress / speed, widthTop + toBlock) : Math.min(widthTop + progress / speed, widthTop + toBlock);
-        document.documentElement.scrollTo(0, r);
-
-        if (r != widthTop + toBlock) {
-          requestAnimationFrame(step);
-        } else {
-          location.hash = hash;
-        }
-      }
-    });
+      });
+    }
   });
 };
 

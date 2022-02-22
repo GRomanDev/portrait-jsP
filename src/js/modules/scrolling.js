@@ -1,20 +1,21 @@
 const scrolling = (upSelector) => {
   const upElem = document.querySelector(upSelector);
 
-    window.addEventListener('scroll', () => {
-      if (document.documentElement.scrollTop > 1650) {
-          upElem.classList.add('animated', 'fadeIn');
-          upElem.classList.remove('fadeOut');
-      } else {
-          upElem.classList.add('fadeOut');
-          upElem.classList.remove('fadeIn');
-      }
-    });
+  window.addEventListener('scroll', () => {
+    if (document.documentElement.scrollTop > 1450) {
+        upElem.classList.add('animated', 'fadeIn');
+        upElem.classList.remove('fadeOut');
+    } else {
+        upElem.classList.add('fadeOut');
+        upElem.classList.remove('fadeIn');
+    }
+  });
 
-    let links = document.querySelectorAll('[href^="#"]'),
-    speed = 0.15;
-    
-    links.forEach(link => {
+  let links = document.querySelectorAll('[href^="#"]'),
+  speed = 0.15;
+  
+  links.forEach(link => {
+    if (link.getAttribute('href') != '#') {
       link.addEventListener('click', function(event) {
         event.preventDefault();
 
@@ -42,7 +43,8 @@ const scrolling = (upSelector) => {
           }
         }
       });
-    });
+    }
+  });
 };
 
 export default scrolling;
