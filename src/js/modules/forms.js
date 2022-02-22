@@ -51,7 +51,7 @@ const forms = () => {
       statusMessage.classList.add('status');
       item.parentNode.appendChild(statusMessage);
 
-      item.classList.add('animated', 'fadeOutUp');
+      item.classList.add('animated', 'fadeOut');
       setTimeout(() => {
         item.style.display = 'none';
       }, 400);
@@ -84,8 +84,8 @@ const forms = () => {
           setTimeout(() => {
             statusMessage.remove();
             item.style.display = 'block';
-            item.classList.remove('fadeOutUp');
-            item.classList.add('fadeInUp');
+            item.classList.remove('fadeOut');
+            item.classList.add('fadeIn');
           }, 5000);
         });
     });

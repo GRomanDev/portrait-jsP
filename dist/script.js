@@ -4662,7 +4662,7 @@ var forms = function forms() {
       var statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
       item.parentNode.appendChild(statusMessage);
-      item.classList.add('animated', 'fadeOutUp');
+      item.classList.add('animated', 'fadeOut');
       setTimeout(function () {
         item.style.display = 'none';
       }, 400);
@@ -4688,8 +4688,8 @@ var forms = function forms() {
         setTimeout(function () {
           statusMessage.remove();
           item.style.display = 'block';
-          item.classList.remove('fadeOutUp');
-          item.classList.add('fadeInUp');
+          item.classList.remove('fadeOut');
+          item.classList.add('fadeIn');
         }, 5000);
       });
     });
